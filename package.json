@@ -12,8 +12,10 @@
   ],
   "author": "",
   "license": "MIT",
-  "dependencies":{
-    "machine": "^1.1.0"
+  "dependencies": {
+    "machine": "^1.1.0",
+    "lodash": "^2.4.1",
+    "machinepack-http": "^0.2.3"
   },
   "devDependencies": {
     "mocha": "^2.1.0"
@@ -21,6 +23,9 @@
   "machinepack": {
     "friendlyName": "NPM",
     "machineDir": "machines/",
-    "machines": []
+    "machines": [
+      "list-packages",
+      "get-package-details"
+    ]
   }
 }
