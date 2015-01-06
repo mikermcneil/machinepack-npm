@@ -1,0 +1,26 @@
+{
+  "name": "machinepack-npm",
+  "version": "0.1.0",
+  "description": "Work with the public NPM repository.",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha -b"
+  },
+  "keywords": [
+    "NPM",
+    "machines",
+    "machinepack"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies":{
+    "machine": "^1.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  },
+  "machinepack": {
+    "friendlyName": "NPM",
+    "machineDir": "machines/",
+    "machines": []
+  }
+}
