@@ -25,7 +25,8 @@
     "machineDir": "machines/",
     "machines": [
       "list-packages",
-      "get-package-json"
+      "get-package-json",
+      "parse-package-json"
     ]
   }
 }

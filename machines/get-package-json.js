@@ -1,15 +1,16 @@
 module.exports = {
 
-  friendlyName: 'Get package details',
+  friendlyName: 'Get package.json',
 
-  description: 'Get metadata for the latest version of the NPM package with the specified name.',
+  description: 'Get the package.json string for the NPM package.',
 
   extendedDescription: '',
 
   inputs: {
-    module: {
+    packageName: {
+      friendlyName: 'Package name',
       example: 'browserify',
-      description: 'The unique name of the npm module.',
+      description: 'The unique name of the NPM package.',
       required: true
     }
   },
@@ -18,24 +19,10 @@ module.exports = {
 
   exits: {
     success: {
-      example: {
-        name: 'browserify',
-        description: 'asg',
-        version: '0.1.1',
-        keywords: ['machine'],
-        author: {
-          name: 'Mike McNeil'
-        },
-        dependencies: [{
-          name: 'lodash',
-          semverRange: '^2.4.1'
-        }],
-        license: 'MIT',
-        rawJson: '{"name": "browserify", etc.}'
-      }
+      example: '{"name": "browserify", etc.}'
     },
-    invalidModule: {
-      description: 'NPM module is in an invalid format'
+    packageNotFound: {
+      description: 'No package exists on the public NPM registry with the specified name.'
     },
     error: {
       description: 'Unexpected error occurred.'
@@ -49,54 +36,28 @@ module.exports = {
 
     require('machinepack-http').sendHttpRequest({
       baseUrl: 'http://registry.npmjs.org',
-      url: util.format('/%s', inputs.module)
+      url: util.format('/%s', inputs.packageName)
     }).exec({
       error: function (err) {
         return exits.error(err);
       },
+      notOk: function (response) {
+        try{
+          // Determine whether the error code was returned because the module does not exist.
+          // (i.e. { status: 404, body: '{"error":"not_found","reason":"document not found"}' })
+          if (response.status === 404 && JSON.parse(response.body).error==='not_found') {
+            return exits.packageNotFound();
+          }
+          return exits.error(response);
+        }
+        catch (e) {
+          return exits.error(e);
+        }
+      },
       success: function (response) {
-        var moduleMetadata = {};
-        var _data;
-        try {
-          _data = JSON.parse(response.body);
-        }
-        catch (e) {
-          return exits.error('Could not parse unexpected response from registry.npm.org:\n'+util.inspect(response.body, false, null)+'\nBecause '+util.inspect(e, false, null));
-        }
-
-        try {
-          // Include basic metadata
-          moduleMetadata.name = _data._id;
-          moduleMetadata.description = _data.description;
-          moduleMetadata.keywords = _data.keywords;
-          moduleMetadata.version = _data['dist-tags'].latest;
-          moduleMetadata.latestVersionPublishedAt = _data.time.modified;
-          moduleMetadata.author = _data.author;
-          moduleMetadata.license = _data.license;
-
-          // Include the metadata about the latest version
-          var latestVersion = _data.versions[moduleMetadata.version];
-          moduleMetadata.dependencies = _.reduce(latestVersion.dependencies, function (memo, semverRange, name){
-            memo.push({
-              name: name,
-              semverRange: semverRange
-            });
-            return memo;
-          }, []);
-
-          // console.log(latestVersion);
-
-          // Also include the raw, unparsed JSON
-          // moduleMetadata.rawJson = response.body;
-        }
-        catch (e) {
-          return exits.invalidModule(e);
-        }
-
-        return exits.success(moduleMetadata);
+        return exits.success(response.body);
       }
     });
-
   },
 
 };
