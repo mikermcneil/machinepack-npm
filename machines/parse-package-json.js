@@ -33,8 +33,8 @@ module.exports = {
         license: 'MIT'
       }
     },
-    invalidModule: {
-      description: 'NPM module is in an invalid format'
+    invalid: {
+      description: 'NPM package is in an invalid format.'
     },
     error: {
       description: 'Unexpected error occurred.'
@@ -76,7 +76,7 @@ module.exports = {
       }, []);
     }
     catch (e) {
-      return exits.invalidModule(e);
+      return exits.invalid(e);
     }
 
     return exits.success(moduleMetadata);
