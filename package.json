@@ -1,6 +1,6 @@
 {
   "name": "machinepack-npm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Work with the public NPM repository.",
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha -b"
