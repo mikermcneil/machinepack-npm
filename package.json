@@ -15,7 +15,10 @@
   "dependencies": {
     "machine": "^1.2.0",
     "lodash": "^2.4.1",
-    "machinepack-http": "^0.2.3"
+    "machinepack-http": "^0.2.3",
+    "zlib": "^1.0.5",
+    "tar": "^1.0.3",
+    "request": "^2.51.0"
   },
   "devDependencies": {
     "mocha": "^2.1.0"
@@ -26,7 +29,8 @@
     "machines": [
       "list-packages",
       "get-package-json",
-      "parse-package-json"
+      "parse-package-json",
+      "download-package"
     ]
   }
 }
