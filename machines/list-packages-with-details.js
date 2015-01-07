@@ -5,7 +5,8 @@ module.exports = {
   inputs: {
     query: {
       example: 'sails',
-      description: 'A string that will be used when querying npm.'
+      description: 'A string that will be used when querying npm.',
+      required: true
     }
   },
   defaultExit: 'success',
