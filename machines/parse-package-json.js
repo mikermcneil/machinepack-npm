@@ -2,13 +2,13 @@ module.exports = {
 
   friendlyName: 'Parse package.json',
 
-  description: 'Parse metadata for the latest version of the NPM package given a package.json string.',
+  description: 'Parse metadata for the latest version of the NPM package given a package.json object.',
 
   extendedDescription: '',
 
   inputs: {
     json: {
-      example: '{"name": "browserify", etc.}',
+      typeclass: 'dictionary',
       description: 'The package.json string for the NPM package.',
       required: true
     }
@@ -47,13 +47,7 @@ module.exports = {
     var _ = require('lodash');
 
     var moduleMetadata = {};
-    var _data;
-    try {
-      _data = JSON.parse(response.body);
-    }
-    catch (e) {
-      return exits.error('Could not parse unexpected response from registry.npm.org:\n'+util.inspect(response.body, false, null)+'\nBecause '+util.inspect(e, false, null));
-    }
+    var _data = inputs.json;
 
     try {
       // Include basic metadata
