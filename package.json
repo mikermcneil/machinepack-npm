@@ -16,7 +16,6 @@
     "machine": "^1.2.0",
     "lodash": "^2.4.1",
     "machinepack-http": "^0.2.3",
-    "zlib": "^1.0.5",
     "tar": "^1.0.3",
     "request": "^2.51.0",
     "async": "^0.9.0"
