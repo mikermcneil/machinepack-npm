@@ -15,7 +15,7 @@
   "dependencies": {
     "machine": "^2.0.3",
     "lodash": "^2.4.1",
-    "machinepack-http": "^0.2.3",
+    "machinepack-http": "^1.0.1",
     "tar": "^1.0.3",
     "request": "^2.51.0",
     "async": "^0.9.0"

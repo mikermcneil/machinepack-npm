@@ -38,11 +38,11 @@ module.exports = {
       baseUrl: 'https://registry.npmjs.org',
       method: 'GET',
       url: '/-/_view/byKeyword',
-      params: JSON.stringify({
+      params: {
         startkey: JSON.stringify([inputs.query]),
         endkey: JSON.stringify([inputs.query, {}]),
         group_level: 3
-      })
+      }
     }, function (err, response) {
       if (err) { return exits.error(err); }
 
