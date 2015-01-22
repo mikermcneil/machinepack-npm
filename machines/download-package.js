@@ -51,6 +51,8 @@ module.exports = {
     var zlib = require('zlib');
     var tar = require('tar');
 
+    // TODO: validate semver
+
     var fileName = inputs.name + '-' + inputs.version + '.tgz';
     var folderName = inputs.name + '-' + inputs.version;
     var uri = 'https://registry.npmjs.org/' + inputs.name + '/-/' + fileName;
