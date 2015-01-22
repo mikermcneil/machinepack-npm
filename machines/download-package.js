@@ -70,9 +70,11 @@ module.exports = {
         return cb(null, tmp + '/package');
       });
 
-      var r = request.get(uri)
-      .pipe(gunner)
-      .pipe(extractor);
+      var httpClientRequest = request.get(uri);
+      httpClientRequest.once('error', function (err){
+        return cb(err||new Error('HTTP request stream error'));
+      });
+      httpClientRequest.pipe(gunner).pipe(extractor);
     })(function afterwards(err, resultPath){
       if (err) return exits.error(err);
       return exits.success(resultPath);
