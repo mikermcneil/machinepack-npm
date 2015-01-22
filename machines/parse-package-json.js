@@ -93,7 +93,7 @@ module.exports = {
       }, []);
 
       // Build an NPM url for convenience.
-      moduleMetadata.npmUrl = util.format('http://npmjs.org/package/%s', moduleMetadata.identity);
+      moduleMetadata.npmUrl = util.format('http://npmjs.org/package/%s', moduleMetadata.name);
 
       // Build the source code URL, if applicable.
       moduleMetadata.sourceCodeUrl = (function extractRepoUrl (){
