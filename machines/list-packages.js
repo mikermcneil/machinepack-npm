@@ -1,6 +1,6 @@
 module.exports = {
   friendlyName: 'List packages',
-  description: 'List packages in the public npm registry which match the specified search query.',
+  description: 'List packages in the public npm registry whose keywords match the specified search query.',
   extendedDescription: '',
   inputs: {
     query: {

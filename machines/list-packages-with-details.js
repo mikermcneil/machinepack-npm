@@ -1,6 +1,6 @@
 module.exports = {
   friendlyName: 'List packages (detailed)',
-  description: 'List packages on the public NPM registry that match the search query, including standard package.json metadata.',
+  description: 'List matching packages, along with metadata from their package.json files.',
   extendedDescription: '',
   inputs: {
     query: {
