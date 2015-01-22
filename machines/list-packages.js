@@ -4,7 +4,7 @@ module.exports = {
   extendedDescription: '',
   inputs: {
     query: {
-      example: 'sails-hook',
+      example: 'sails-hook-',
       description: 'A string that will be used when querying npm.',
       required: true
     }

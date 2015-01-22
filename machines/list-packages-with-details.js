@@ -1,6 +1,6 @@
 module.exports = {
   friendlyName: 'List packages (detailed)',
-  description: 'List all available metadata for packages on the public NPM registry that match the search query.',
+  description: 'List packages on the public NPM registry that match the search query, including standard package.json metadata.',
   extendedDescription: '',
   inputs: {
     query: {
@@ -13,16 +13,29 @@ module.exports = {
   exits: {
     error: {},
     success: {
-      example: [
-      '{...package.json data as a JSON string...}'
-      ]
+      example: [{
+        name: 'browserify',
+        description: 'asg',
+        version: '0.1.1',
+        keywords: ['machine'],
+        author: {
+          name: 'Substack'
+        },
+        dependencies: [{
+          name: 'lodash',
+          semverRange: '^2.4.1'
+        }],
+        license: 'MIT',
+        rawJson: '{...package.json data as a JSON string...}'
+      }]
     }
   },
   fn: function (inputs, cb){
 
     var async = require('async');
+    var Machine = require('machine');
 
-    require('machine').build(require('./list-packages'))({
+    Machine.build(require('./list-packages'))({
       query: inputs.query
     }).exec(function (err, npmPackageNames) {
       if (err) return cb(err);
@@ -32,11 +45,22 @@ module.exports = {
       var npmModules = [];
 
       async.each(npmPackageNames, function (packageName, next) {
-        require('machine').build(require('./get-package-json'))({
+        Machine.build(require('./get-package-json'))({
           packageName: packageName
         }).exec(function(err, packageJsonString) {
           if (err) return next(err);
-          npmModules.push(packageJsonString);
+
+          var metadata;
+          try {
+            metadata = Machine.build(require('./parse-package-json'))({
+              json: packageJsonString
+            }).execSync();
+            metadata.rawJson = packageJsonString;
+          }
+          catch (e){
+            return next(e);
+          }
+          npmModules.push(metadata);
           return next();
         });
       }, function (err) {

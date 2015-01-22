@@ -2,13 +2,15 @@ module.exports = {
 
   friendlyName: 'Parse package.json',
 
-  description: 'Parse metadata for the latest version of the NPM package given a package.json object.',
+  description: 'Parse metadata for the latest version of the NPM package given a package.json string.',
 
   extendedDescription: '',
 
+  sync: true,
+
   inputs: {
     json: {
-      typeclass: 'dictionary',
+      example: '{...packagejson contents...}',
       description: 'The package.json string for the NPM package.',
       required: true
     }
@@ -24,7 +26,7 @@ module.exports = {
         version: '0.1.1',
         keywords: ['machine'],
         author: {
-          name: 'Mike McNeil'
+          name: 'Substack'
         },
         dependencies: [{
           name: 'lodash',
@@ -47,14 +49,21 @@ module.exports = {
     var _ = require('lodash');
 
     var moduleMetadata = {};
-    var _data = inputs.json;
+    var _data;
+
+    try {
+      _data = JSON.parse(inputs.json);
+    }
+    catch (e){
+      return exits.invalid(e);
+    }
 
     try {
       // Include basic metadata
       moduleMetadata.name = _data._id;
       moduleMetadata.description = _data.description;
       moduleMetadata.keywords = _data.keywords;
-      moduleMetadata.version = _data['dist-tags'].latest;
+      moduleMetadata.version = _data['dist-tags'].latest || _data.version;
       moduleMetadata.latestVersionPublishedAt = _data.time.modified;
       moduleMetadata.author = _data.author;
       moduleMetadata.license = _data.license;
