@@ -56,18 +56,27 @@ module.exports = {
     var uri = 'https://registry.npmjs.org/' + inputs.name + '/-/' + fileName;
     var tmp = path.resolve(os.tmpDir(), folderName);
 
-    var gunner = zlib.createGunzip()
-    .on('error', exits.error);
+    (function (cb){
+      var gunner = zlib.createGunzip()
+      .once('error', function (err){
+        return cb(err||new Error('gzip extraction error'));
+      });
 
-    var extractor = tar.Extract({ path: tmp })
-    .on('error', exits.error)
-    .on('end', function() {
-      return exits.success(tmp + '/package');
+      var extractor = tar.Extract({ path: tmp })
+      .once('error', function (err){
+        return cb(err||new Error('tar extraction error'));
+      })
+      .once('end', function() {
+        return cb(null, tmp + '/package');
+      });
+
+      var r = request.get(uri)
+      .pipe(gunner)
+      .pipe(extractor);
+    })(function afterwards(err, resultPath){
+      if (err) return exits.error(err);
+      return exits.success(resultPath);
     });
-
-    var r = request.get(uri)
-    .pipe(gunner)
-    .pipe(extractor);
   }
 
 };
