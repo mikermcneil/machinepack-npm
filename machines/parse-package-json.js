@@ -80,8 +80,10 @@ module.exports = {
       moduleMetadata.author = _data.author;
       moduleMetadata.license = _data.license;
 
-      // Include the metadata about the latest version
-      var latestVersion = _data.versions[moduleMetadata.version];
+      // Determine where to find metadata about the latest version
+      var latestVersion = _data.versions ? _data.versions[moduleMetadata.version] : _data;
+
+      // Parse dependencies.
       moduleMetadata.dependencies = _.reduce(latestVersion.dependencies, function (memo, semverRange, name){
         memo.push({
           name: name,
