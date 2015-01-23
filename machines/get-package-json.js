@@ -2,7 +2,7 @@ module.exports = {
 
   friendlyName: 'Get package.json',
 
-  description: 'Get the package.json string for the NPM package.',
+  description: 'Get the specified package\'s metadata from the NPM registry.',
 
   extendedDescription: '',
 
@@ -19,7 +19,8 @@ module.exports = {
 
   exits: {
     success: {
-      example: '{"name": "browserify", etc.}'
+      example: '{"name": "browserify", etc.}',
+      variableName: 'packageJsonString'
     },
     packageNotFound: {
       description: 'No package exists on the public NPM registry with the specified name.'
