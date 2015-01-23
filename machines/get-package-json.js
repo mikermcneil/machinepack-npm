@@ -19,6 +19,7 @@ module.exports = {
 
   exits: {
     success: {
+      description: 'Returns a JSON string.',
       example: '{"name": "browserify", etc.}',
       variableName: 'packageJsonString'
     },
