@@ -62,7 +62,8 @@ module.exports = {
             metadata = Machine.build(require('./parse-package-json'))({
               json: packageJsonString
             }).execSync();
-            metadata.rawJson = JSON.stringify(metadata);
+            // metadata.rawJson = JSON.stringify(_.extend(JSON.parse(packageJsonString), metadata));
+            metadata.rawJson = packageJsonString;
           }
           catch (e){
             return next(e);
