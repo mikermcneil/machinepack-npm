@@ -1,11 +1,12 @@
 module.exports = {
   friendlyName: 'List packages (detailed)',
-  description: 'List matching packages, along with metadata from their package.json files.',
-  extendedDescription: '',
+  description: 'List matching packages and include metadata from their package.json files.',
+  extendedDescription: 'Also includes the raw package.json string as `rawJson`, in case you need to parse additional non-standard metadata.',
   inputs: {
     query: {
       example: 'sails',
       description: 'A string that will be used when querying npm.',
+      extendedDescription: 'This string will be used to search within package keywords.',
       required: true
     }
   },
