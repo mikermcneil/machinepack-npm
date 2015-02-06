@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Work with the public NPM repository.",
   "scripts": {
-    "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js --timeout=10000 --slow=3500"
+    "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js"
   },
   "keywords": [
     "NPM",
