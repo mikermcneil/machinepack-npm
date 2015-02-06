@@ -18,6 +18,17 @@ module.exports = function (testSuite, eachTest, done){
 
   async.map(testSuite.expectations, function (testCase, next_testCase){
 
+    // Defer test
+    if (testCase.todo){
+      eachTest(testCase, function (informTestFinished){
+        if (_.isFunction(informTestFinished)){
+          informTestFinished();
+        }
+        return next_testCase();
+      });
+      return;
+    }
+
     eachTest(testCase, function (informTestFinished){
       // Configure the inputs
       var machineInstance = machine(testCase.using||{});
@@ -112,8 +123,12 @@ module.exports = function (testSuite, eachTest, done){
     });
   }, function (err, results) {
     if (err) {
-      return done(err);
+      if (_.isFunction(done)) {
+        return done(err);
+      }
     }
-    return done(null, results);
+    if (_.isFunction(done)) {
+      return done(null, results);
+    }
   });
 };

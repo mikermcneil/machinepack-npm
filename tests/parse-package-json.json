@@ -1,0 +1,26 @@
+{
+  "machine": "parse-package-json",
+  "expectations": [
+    {
+      "todo": "NOT YET IMPLEMENTED",
+      "using": {
+        "json": ""
+      },
+      "outcome": "success"
+    },
+    {
+      "todo": "NOT YET IMPLEMENTED",
+      "using": {
+        "json": ""
+      },
+      "outcome": "invalid"
+    },
+    {
+      "todo": "NOT YET IMPLEMENTED",
+      "using": {
+        "json": ""
+      },
+      "outcome": "error"
+    }
+  ]
+}

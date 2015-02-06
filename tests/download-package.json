@@ -1,0 +1,29 @@
+{
+  "machine": "download-package",
+  "expectations": [
+    {
+      "todo": "NOT YET IMPLEMENTED",
+      "using": {
+        "name": "",
+        "version": ""
+      },
+      "outcome": "success"
+    },
+    {
+      "todo": "NOT YET IMPLEMENTED",
+      "using": {
+        "name": "",
+        "version": ""
+      },
+      "outcome": "invalid"
+    },
+    {
+      "todo": "NOT YET IMPLEMENTED",
+      "using": {
+        "name": "",
+        "version": ""
+      },
+      "outcome": "error"
+    }
+  ]
+}

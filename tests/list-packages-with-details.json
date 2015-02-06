@@ -1,0 +1,29 @@
+{
+  "machine": "list-packages-with-details",
+  "expectations": [
+    {
+      "using": {
+        "query": "sails"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "query": "hash-object"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "query": "machinepack-phantomjscloud"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "query": "foobarbazbingbong-asddagasdg-asd1lgdaga2sdgah"
+      },
+      "outcome": "success"
+    }
+  ]
+}

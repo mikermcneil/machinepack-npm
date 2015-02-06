@@ -1,0 +1,35 @@
+{
+  "machine": "get-package-json",
+  "expectations": [
+    {
+      "using": {
+        "packageName": "sails"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "packageName": "express"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "packageName": "hash-object"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "packageName": "lodash"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "packageName": "foobarbazbingbong-asddagasdg-asd1lgdaga2sdgah"
+      },
+      "outcome": "packageNotFound"
+    }
+  ]
+}
