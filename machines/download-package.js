@@ -21,11 +21,12 @@ module.exports = {
     },
 
     registry: {
-      friendlyName: 'Registry URL',
-      description: 'The URL of the NPM registry to use (defaults to public npm registry)',
-      defaultsTo: 'https://registry.npmjs.org',
-      example: 'https://your-private-registry.npmjs.org'
+      "friendlyName": "Registry URL",
+      "description": "The URL of the NPM registry to use (defaults to public npm registry)",
+      "defaultsTo": "https://registry.npmjs.org",
+      "example": "https://your-private-registry.npmjs.org"
     }
+,
   },
 
   defaultExit: 'success',
@@ -42,6 +43,18 @@ module.exports = {
     error: {
       description: 'Unexpected error occurred.',
       variableName: 'err'
+    },
+
+    untarFailed: {
+      description: 'Could not extract (untar) the tarball downloaded from NPM.'
+    },
+
+    unzipFailed: {
+      description: 'Could not unzip the `.tar.gz` file downloaded from NPM.'
+    },
+
+    downloadFailed: {
+      description: 'Could not download the package from npm- perhaps the registry URL is incorrect?'
     }
   },
 
