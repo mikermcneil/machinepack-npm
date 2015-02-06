@@ -2,7 +2,7 @@ module.exports = {
 
   friendlyName: 'Get package.json',
 
-  description: 'Get the specified package\'s metadata from the NPM registry.',
+  description: 'Get the package.json string for the specified package from the NPM registry.',
 
   extendedDescription: '',
 
