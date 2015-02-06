@@ -2,6 +2,7 @@ module.exports = {
   friendlyName: 'List packages (detailed)',
   description: 'List matching packages and include metadata from their package.json files.',
   extendedDescription: 'Also includes the raw package.json string as `rawJson`, in case you need to parse additional non-standard metadata.',
+  cacheable: true,
   inputs: {
     query: {
       example: 'sails',
@@ -12,30 +13,11 @@ module.exports = {
   },
   defaultExit: 'success',
   exits: {
-    error: {},
+    error: {
+      description: 'Unexpected error occurred'
+    },
     success: {
-      example: [{
-        name: 'browserify',
-        description: 'asg',
-        version: '0.1.1',
-        keywords: ['machine'],
-        latestVersionPublishedAt: '2015-01-19T22:26:54.588Z',
-        npmUrl: 'http://npmjs.org/package/machinepack-foo',
-        sourceCodeUrl: 'https://github.com/baz/machinepack-foo',
-        author: {
-          name: 'Substack'
-        },
-        dependencies: [{
-          name: 'lodash',
-          semverRange: '^2.4.1'
-        }],
-        license: 'MIT',
-        contributors: [{
-          name: 'Substack',
-          email: 'substack@substack.com'
-        }],
-        rawJson: '{...package.json data as a JSON string...}'
-      }]
+      example: [ require('../schemas/package') ]
     }
   },
   fn: function (inputs, cb){

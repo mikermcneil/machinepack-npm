@@ -4,9 +4,11 @@ module.exports = {
 
   description: 'Parse metadata for the latest version of the NPM package given a package.json string.',
 
-  extendedDescription: '',
+  extendedDescription: 'This machine understands how to parse both a normal package.json string, as well as a rich package.json string downloaded from an NPM registry.',
 
   sync: true,
+
+  cacheable: true,
 
   inputs: {
     json: {
@@ -20,30 +22,11 @@ module.exports = {
 
   exits: {
     success: {
-      example: {
-        name: 'browserify',
-        description: 'asg',
-        version: '0.1.1',
-        keywords: ['machine'],
-        latestVersionPublishedAt: '2015-01-19T22:26:54.588Z',
-        npmUrl: 'http://npmjs.org/package/machinepack-foo',
-        sourceCodeUrl: 'https://github.com/baz/machinepack-foo',
-        author: {
-          name: 'Substack'
-        },
-        dependencies: [{
-          name: 'lodash',
-          semverRange: '^2.4.1'
-        }],
-        license: 'MIT',
-        contributors: [{
-          name: 'Substack',
-          email: 'substack@substack.com'
-        }]
-      }
+      description: 'Returns parsed dictionary of data from the provided package.json string.',
+      example: require('../schemas/package')
     },
     invalid: {
-      description: 'NPM package is in an invalid format.'
+      description: 'NPM package.json string is in an invalid format.'
     },
     error: {
       description: 'Unexpected error occurred.'

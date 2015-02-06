@@ -4,6 +4,8 @@ module.exports = {
 
   description: 'Get the package.json string for the specified package from the NPM registry.',
 
+  cacheable: true,
+
   extendedDescription: '',
 
   inputs: {
@@ -20,8 +22,8 @@ module.exports = {
   exits: {
     success: {
       description: 'Returns a JSON string.',
+      variableName: 'packageJsonString',
       example: '{"name": "browserify", etc.}',
-      variableName: 'packageJsonString'
     },
     packageNotFound: {
       description: 'No package exists on the public NPM registry with the specified name.'
