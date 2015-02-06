@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Work with the public NPM repository.",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha -b mocha-testrunner.js --timeout=10000 --slow=3500"
+    "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js --timeout=10000 --slow=3500"
   },
   "keywords": [
     "NPM",
@@ -22,7 +22,7 @@
     "machinepack-urls": "^3.0.0"
   },
   "devDependencies": {
-    "mocha": "^2.1.0"
+    "test-machinepack-mocha": "^0.2.0"
   },
   "machinepack": {
     "friendlyName": "NPM",
