@@ -1,6 +1,6 @@
 {
   "name": "machinepack-npm",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "Work with the public NPM repository.",
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha -b mocha-testrunner.js --timeout=10000 --slow=3500"
