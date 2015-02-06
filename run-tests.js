@@ -5,7 +5,7 @@
 var util = require('util');
 var _ = require('lodash');
 var async = require('async');
-var Pack = require('../');
+var Pack = require('./');
 
 
 
