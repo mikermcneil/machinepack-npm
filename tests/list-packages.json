@@ -1,0 +1,35 @@
+{
+  "machine": "list-packages",
+  "expectations": [
+    {
+      "using": {
+        "query": "sails"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "query": "express"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "query": "hash-object"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "query": "lodash"
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "query": "foobarbazbingbong"
+      },
+      "outcome": "success"
+    }
+  ]
+}

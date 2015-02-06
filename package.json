@@ -3,7 +3,7 @@
   "version": "1.1.2",
   "description": "Work with the public NPM repository.",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha -b"
+    "test": "node ./node_modules/mocha/bin/mocha -b tests --timeout=10000 --slow=3500"
   },
   "keywords": [
     "NPM",
