@@ -60,23 +60,25 @@ module.exports = {
 
     // TODO: validate that inputs.version is a semver version string
 
-    var registryUrl = (function (_registryUrl){
-
-      // Default to public NPM registry
-      _registryUrl = inputs.registry || 'https://registry.npmjs.org';
-
-      // Build a sanitized version of the provided URL (i.e. with "http://")
-      _registryUrl = Urls.sanitize({
-        url: inputs.registry,
-      }).execSync();
-
-      return _registryUrl;
-    })();
-
-    var fileName = inputs.name + '-' + inputs.version + '.tgz';
+    var remoteFilename = inputs.name + '-' + inputs.version + '.tgz';
     var folderName = inputs.name + '-' + inputs.version;
-    var uri = registryUrl + '/' + inputs.name + '/-/' + fileName;
     var tmp = path.resolve(os.tmpDir(), folderName);
+
+
+    // Build a sanitized version of the provided registry URL (i.e. with "http://")
+    // (default to public NPM registry)
+    var registryUrl = Urls.sanitize({
+      url: inputs.registry || 'https://registry.npmjs.org',
+    }).execSync();
+
+    // Build the URL where the remote package tarball lives.
+    var uri = Urls.buildUrlFromTemplate({
+      urlTemplate: registryUrl+'/:name/-/:remoteFilename',
+      data: {
+        name: inputs.name,
+        remoteFilename: remoteFilename
+      },
+    }).execSync();
 
     (function (cb){
       var gunner = zlib.createGunzip()
