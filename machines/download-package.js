@@ -18,6 +18,13 @@ module.exports = {
       description: 'The version of the NPM package to fetch',
       example: '0.0.1',
       required: true,
+    },
+
+    registry: {
+      friendlyName: 'Registry URL',
+      description: 'The URL of the NPM registry to use (defaults to public npm registry)',
+      defaultsTo: 'https://registry.npmjs.org',
+      example: 'https://your-private-registry.npmjs.org'
     }
   },
 
@@ -30,7 +37,6 @@ module.exports = {
       extendedDescription: 'The untar\'ed files will be stored in the operating system\'s temporary directory under a folder given by the `name` and `version` inputs.  e.g. if `name` is "foobar" and `version` is "0.2.1", then the untar\'ed files might be in "/tmp/foobar-0.2.1/package/*".  This exit returns the absolute path to the folder of untar\'ed goodies.',
       example: '/var/folders/_s/347n05_x2rgb_0w6s6y0ytr00000gn/T/machinepack-phantomjscloud-0.1.2',
       variableName: 'pathToDownloadedPkg'
-
     },
 
     error: {
@@ -50,12 +56,26 @@ module.exports = {
     var path = require('path');
     var zlib = require('zlib');
     var tar = require('tar');
+    var Urls = require('machinepack-urls');
 
-    // TODO: validate semver
+    // TODO: validate that inputs.version is a semver version string
+
+    var registryUrl = (function (_registryUrl){
+
+      // Default to public NPM registry
+      _registryUrl = inputs.registry || 'https://registry.npmjs.org';
+
+      // Build a sanitized version of the provided URL (i.e. with "http://")
+      _registryUrl = Urls.sanitize({
+        url: inputs.registry,
+      }).execSync();
+
+      return _registryUrl;
+    })();
 
     var fileName = inputs.name + '-' + inputs.version + '.tgz';
     var folderName = inputs.name + '-' + inputs.version;
-    var uri = 'https://registry.npmjs.org/' + inputs.name + '/-/' + fileName;
+    var uri = registryUrl + '/' + inputs.name + '/-/' + fileName;
     var tmp = path.resolve(os.tmpDir(), folderName);
 
     (function (cb){
