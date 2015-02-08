@@ -31,6 +31,7 @@ module.exports = {
         "latestVersionPublishedAt": "2015-01-19T22:26:54.588Z",
         "npmUrl": "http://npmjs.org/package/machinepack-foo",
         "sourceCodeUrl": "https://github.com/baz/machinepack-foo",
+        "sourceUrl": "https://github.com/baz/machinepack-foo",
         "author": "Substack <substack@substack.com>",
         "main": "lib/index.js",
         "dependencies": [{
@@ -100,7 +101,7 @@ module.exports = {
       moduleMetadata.npmUrl = util.format('http://npmjs.org/package/%s', moduleMetadata.name);
 
       // Build the source code URL, if applicable.
-      moduleMetadata.sourceCodeUrl = (function extractRepoUrl (){
+      moduleMetadata.sourceUrl = (function extractRepoUrl (){
         var repoUrl;
 
         // First grab the repoUrl from the npm package.json data
@@ -129,6 +130,8 @@ module.exports = {
 
         return repoUrl;
       })();
+      // Alias for compatibility
+      moduleMetadata.sourceCodeUrl = sourceUrl;
 
       // Normalize contributors list from NPM maintainers, contributors, & author properties.
       moduleMetadata.contributors = (function buildAggregatedContributorsList () {
