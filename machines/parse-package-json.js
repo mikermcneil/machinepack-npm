@@ -131,7 +131,7 @@ module.exports = {
         return repoUrl;
       })();
       // Alias for compatibility
-      moduleMetadata.sourceCodeUrl = sourceUrl;
+      moduleMetadata.sourceCodeUrl = moduleMetadata.sourceUrl;
 
       // Normalize contributors list from NPM maintainers, contributors, & author properties.
       moduleMetadata.contributors = (function buildAggregatedContributorsList () {
