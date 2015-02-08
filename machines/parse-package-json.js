@@ -30,7 +30,6 @@ module.exports = {
         "keywords": ["machine"],
         "latestVersionPublishedAt": "2015-01-19T22:26:54.588Z",
         "npmUrl": "http://npmjs.org/package/machinepack-foo",
-        "sourceCodeUrl": "https://github.com/baz/machinepack-foo",
         "sourceUrl": "https://github.com/baz/machinepack-foo",
         "author": "Substack <substack@substack.com>",
         "main": "lib/index.js",
@@ -130,8 +129,6 @@ module.exports = {
 
         return repoUrl;
       })();
-      // Alias for compatibility
-      moduleMetadata.sourceCodeUrl = moduleMetadata.sourceUrl;
 
       // Normalize contributors list from NPM maintainers, contributors, & author properties.
       moduleMetadata.contributors = (function buildAggregatedContributorsList () {
