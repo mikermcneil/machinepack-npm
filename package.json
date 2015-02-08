@@ -22,7 +22,7 @@
     "machinepack-urls": "^3.0.0"
   },
   "devDependencies": {
-    "test-machinepack-mocha": "^0.2.0"
+    "test-machinepack-mocha": "^0.2.2"
   },
   "machinepack": {
     "friendlyName": "NPM",
@@ -33,6 +33,11 @@
       "parse-package-json",
       "download-package",
       "list-packages-with-details"
-    ]
+    ],
+    "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mikermcneil/machinepack-npm.git"
   }
 }
