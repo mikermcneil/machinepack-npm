@@ -19,7 +19,7 @@ module.exports = {
       description: 'Unexpected error occurred.'
     }
   },
-  fn: function (inputs,exits) {
+  fn: function (inputs, exits) {
 
 
     // Module dependencies

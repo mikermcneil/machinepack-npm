@@ -1,0 +1,33 @@
+{
+  "machine": "install-package",
+  "expectations": [
+    {
+      "using": {
+        "name": "sane-cli",
+        "version": "1.0.0c"
+      },
+      "outcome": "invalidSemVer"
+    },
+    {
+      "using": {
+        "name": "lodash",
+        "version": ""
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "name": "string",
+        "save-dev": true
+      },
+      "outcome": "success"
+    },
+    {
+      "using": {
+        "name": "lodash",
+        "version": "^3.1.0"
+      },
+      "outcome": "success"
+    }
+  ]
+}
