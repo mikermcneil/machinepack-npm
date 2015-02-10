@@ -29,6 +29,18 @@ module.exports = {
       friendlyName: '--save-dev flag',
       description: 'Installs the npm package with the --save-dev flag enabled',
       example: true
+    },
+
+    prefix: {
+      friendlyName: '--prefix flag',
+      description: 'Changes the root path to where your npm package gets installed (it will still be installed within node_modules of that folder).',
+      example: './path-to-project'
+    },
+
+    loglevel: {
+      friendlyName: '--loglevel flag',
+      description: 'Changes the loglevel of npm. silent, warn, verbose and silly are options.',
+      example: 'warn'
     }
   },
 
@@ -94,7 +106,8 @@ module.exports = {
       ],
       save: npmSave,
       saveDev: npmSaveDev,
-      loglevel: 'silent',
+      loglevel: inputs.loglevel || 'silent',
+      prefix: inputs.prefix || undefined,
       'cache-min': 999999999
     }, function (err) {
       if (err) { return exits.error(err); }

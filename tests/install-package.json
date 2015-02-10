@@ -18,7 +18,8 @@
     {
       "using": {
         "name": "string",
-        "save-dev": true
+        "saveDev": true,
+        "prefix": "./"
       },
       "outcome": "success"
     },

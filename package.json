@@ -3,7 +3,7 @@
   "version": "3.0.1",
   "description": "Work with the public NPM repository.",
   "scripts": {
-    "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js"
+    "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js -t 12000"
   },
   "keywords": [
     "NPM",
@@ -24,7 +24,7 @@
     "tar": "^1.0.3"
   },
   "devDependencies": {
-    "test-machinepack-mocha": "^0.2.3"
+    "test-machinepack-mocha": "Globegitter/test-machinepack-mocha#tmp-dir"
   },
   "machinepack": {
     "friendlyName": "NPM",
