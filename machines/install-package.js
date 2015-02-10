@@ -85,7 +85,7 @@ module.exports = {
       npmSaveDev = true;
     }
 
-    console.log(process.cwd());
+    //console.log(process.cwd());
 
     //install the npm package
     npm.install({
