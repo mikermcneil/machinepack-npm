@@ -55,6 +55,10 @@ module.exports = {
 
     downloadFailed: {
       description: 'Could not download the package from npm- perhaps the registry URL is incorrect?'
+    },
+
+    invalidSemVer: {
+      description: 'Passed an invalid semantic version number. See https://docs.npmjs.com/misc/semver for details.'
     }
   },
 
@@ -70,8 +74,11 @@ module.exports = {
     var zlib = require('zlib');
     var tar = require('tar');
     var Urls = require('machinepack-urls');
+    var semver = require('semver');
 
-    // TODO: validate that inputs.version is a semver version string
+    if (!semver.valid(inputs.version)) {
+      return exit.invalidSemVer();
+    }
 
     var remoteFilename = inputs.name + '-' + inputs.version + '.tgz';
     var folderName = inputs.name + '-' + inputs.version;

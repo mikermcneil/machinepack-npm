@@ -3,7 +3,7 @@
   "version": "3.0.1",
   "description": "Work with the public NPM repository.",
   "scripts": {
-    "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js"
+    "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js -t 12000"
   },
   "keywords": [
     "NPM",
@@ -13,16 +13,18 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "machine": "^3.0.0",
-    "lodash": "^2.4.1",
-    "machinepack-http": "^1.1.0",
-    "tar": "^1.0.3",
-    "request": "^2.51.0",
     "async": "^0.9.0",
-    "machinepack-urls": "^3.0.0"
+    "enpeem": "Globegitter/enpeem#save-flags-support",
+    "lodash": "^3.1.0",
+    "machine": "^4.0.0",
+    "machinepack-http": "^1.1.0",
+    "machinepack-urls": "^3.0.0",
+    "request": "^2.51.0",
+    "semver": "^4.2.2",
+    "tar": "^1.0.3"
   },
   "devDependencies": {
-    "test-machinepack-mocha": "^0.2.2"
+    "test-machinepack-mocha": "Globegitter/test-machinepack-mocha#tmp-dir"
   },
   "machinepack": {
     "friendlyName": "NPM",
@@ -32,12 +34,13 @@
       "get-package-json",
       "parse-package-json",
       "download-package",
+      "install-package",
       "list-packages-with-details"
     ],
     "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:mikermcneil/machinepack-npm.git"
+    "url": "https://github.com/mikermcneil/machinepack-npm.git"
   }
 }
