@@ -1,6 +1,6 @@
 module.exports = {
   friendlyName: 'Download package',
-  description: 'Stream the tarball for the NPM package+version to disk.',
+  description: 'Stream the tarball for the NPM package+version to disk, then extract it.',
   extendedDescription: '',
   cacheable: true,
 
