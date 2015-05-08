@@ -33,6 +33,14 @@ module.exports = {
       extendedDescription: 'You should avoid publishing on top of existing versions of packages.  It can break developers\' production deployments.  However, if you made a terrible mistake and must do this, unpublish this version of your package and try running this machine again.  Note that you may need to wait 2-3 hours before the NPM registry will let you republish.'
     },
 
+    noSuchDir: {
+      description: 'No directory exists at the provided path.'
+    },
+
+    notADir: {
+      description: 'The provided path does not point to a directory (i.e. it might be a file or shortcut)'
+    },
+
     success: {
       description: 'Done.',
     },
@@ -57,11 +65,14 @@ module.exports = {
           if (err.message.match(/You cannot publish over the previously published version/i)){
             return exits.alreadyExists();
           }
+          return exits.error(err);
         }
         catch (_e) {
           return exits.error(err);
         }
       },
+      notADir: exits.notADir,
+      noSuchDir: exits.noSuchDir,
       success: function (bufferedOutput){
         return exits.success();
       }
