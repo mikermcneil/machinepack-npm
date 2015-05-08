@@ -33,7 +33,6 @@
     "machineDir": "machines/",
     "machines": [
       "list-packages",
-      "get-package-json",
       "parse-package-json",
       "download-package",
       "install-package",
@@ -41,7 +40,8 @@
       "publish",
       "unpublish",
       "open-source",
-      "restrict"
+      "restrict",
+      "fetch-info"
     ],
     "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
   },

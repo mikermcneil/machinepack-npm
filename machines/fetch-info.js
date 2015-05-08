@@ -1,8 +1,8 @@
 module.exports = {
 
-  friendlyName: 'Get package.json',
+  friendlyName: 'Fetch package metadata',
 
-  description: 'Get the package.json string for the specified package from the NPM registry.',
+  description: 'Fetch the package.json string for the specified package from the NPM registry.',
 
   cacheable: true,
 

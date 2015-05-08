@@ -1,5 +1,5 @@
 {
-  "machine": "get-package-json",
+  "machine": "fetch-info",
   "expectations": [
     {
       "using": {
