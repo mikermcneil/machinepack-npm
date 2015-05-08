@@ -17,6 +17,7 @@
     "enpeem": "^2.0.0",
     "lodash": "^3.1.0",
     "machine": "^4.0.0",
+    "machinepack-fs": "^2.3.0",
     "machinepack-http": "^1.1.0",
     "machinepack-process": "^1.0.1",
     "machinepack-urls": "^3.0.0",

@@ -41,8 +41,16 @@ module.exports = {
       description: 'The provided path does not point to a directory (i.e. it might be a file or shortcut)'
     },
 
+    invalidPackage: {
+      description: 'The package does not contain a package.json file, or it cannot be parsed.'
+    },
+
     success: {
       description: 'Done.',
+      example: {
+        name: 'some-package',
+        version: '2.0.0'
+      }
     },
 
   },
@@ -50,33 +58,53 @@ module.exports = {
 
   fn: function (inputs,exits) {
 
+    var Path = require('path');
     var Proc = require('machinepack-process');
+    var Filesystem = require('machinepack-fs');
 
-    Proc.spawn({
-      command: 'npm publish',
-      dir: inputs.dir
-    }).exec({
-      error: function (err){
-        try {
-          // err.stack
-          // err.killed
-          // err.signal
-          // err.code
-          if (err.message.match(/You cannot publish over the previously published version/i)){
-            return exits.alreadyExists();
-          }
-          return exits.error(err);
-        }
-        catch (_e) {
-          return exits.error(err);
-        }
+    Filesystem.readJson({
+      source: Path.resolve(inputs.dir, 'package.json'),
+      schema: {
+        name: 'some-package',
+        version: '2.0.0'
+      }
+    }, {
+      error: exits.error,
+      doesNotExist: function (){
+        return exits.invalidPackage();
       },
-      notADir: exits.notADir,
-      noSuchDir: exits.noSuchDir,
-      success: function (bufferedOutput){
-        return exits.success();
+      couldNotParse: function (){
+        return exits.invalidPackage();
+      },
+      success: function (pkgData){
+        Proc.spawn({
+          command: 'npm publish',
+          dir: inputs.dir
+        }).exec({
+          error: function (err){
+            try {
+              // err.stack
+              // err.killed
+              // err.signal
+              // err.code
+              if (err.message.match(/You cannot publish over the previously published version/i)){
+                return exits.alreadyExists();
+              }
+              return exits.error(err);
+            }
+            catch (_e) {
+              return exits.error(err);
+            }
+          },
+          notADir: exits.notADir,
+          noSuchDir: exits.noSuchDir,
+          success: function (bufferedOutput){
+            return exits.success(pkgData);
+          }
+        });
       }
     });
+
   },
 
 
