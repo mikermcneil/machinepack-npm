@@ -9,7 +9,7 @@ module.exports = {
 
   inputs: {
 
-    'package': {
+    packageName: {
       friendlyName: 'Package name',
       description: 'The name of the NPM package to unpublish.',
       example: 'cheerio',
@@ -38,7 +38,7 @@ module.exports = {
     var Proc = require('machinepack-process');
 
     Proc.spawn({
-      command: 'npm unpublish'
+      command: 'npm unpublish '+inputs.packageName+(inputs.version?('@'+inputs.version):'-f')
     }).exec({
       error: function (err){
         return exits.error(err);
