@@ -12,7 +12,7 @@ module.exports = {
     packageName: {
       friendlyName: 'Package name',
       description: 'The name of the NPM package to retrict access to.',
-      example: 'cheerio',
+      example: '@mattmueller/cheerio',
       required: true
     }
 
@@ -21,9 +21,13 @@ module.exports = {
 
   exits: {
 
+    unscopedPackage: {
+      description: 'You can\'t change the access level of an unscoped package (e.g. "lodash" is unscoped, whereas "@jdalton/lodash" is scoped.)'
+    },
+
     success: {
       description: 'Done.',
-    },
+    }
 
   },
 
@@ -31,13 +35,23 @@ module.exports = {
   fn: function (inputs,exits) {
     var Proc = require('machinepack-process');
 
+    console.log('Running:','npm access restricted '+inputs.packageName);
     Proc.spawn({
       command: 'npm access restricted '+inputs.packageName
     }).exec({
       error: function (err){
+        console.log('error exit', err);
+        try {
+          if (err.message.match(/Sorry, you can\'t change the access level of unscoped packages/i)) {
+            return exits.unscopedPackage();
+          }
+        }
+        catch (_e){}
+        console.log('CALLING EXIT!');
         return exits.error(err);
       },
       success: function (bufferedOutput){
+        console.log('success exit');
         return exits.success();
       }
     });

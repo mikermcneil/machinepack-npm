@@ -3,7 +3,7 @@
   "expectations": [
     {
       "using": {
-        "query": "sails"
+        "query": "sails-generate-backend"
       },
       "outcome": "success"
     },

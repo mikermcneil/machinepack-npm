@@ -48,7 +48,7 @@ module.exports = {
     success: {
       description: 'Done.',
       example: {
-        name: 'some-package',
+        name: '@mattmueller/cheerio',
         version: '2.0.0'
       }
     },

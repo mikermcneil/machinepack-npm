@@ -12,7 +12,7 @@ module.exports = {
     packageName: {
       friendlyName: 'Package name',
       description: 'The name of the NPM package to open-source.',
-      example: 'cheerio',
+      example: '@mattmueller/cheerio',
       required: true
     }
 
