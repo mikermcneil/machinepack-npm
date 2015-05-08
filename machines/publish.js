@@ -28,6 +28,11 @@ module.exports = {
 
   exits: {
 
+    alreadyExists: {
+      description: 'Cannot overwrite- that package has already been published at the version in the package.json file.',
+      extendedDescription: 'You should avoid publishing on top of existing versions of packages.  It can break developers\' production deployments.  However, if you made a terrible mistake and must do this, unpublish this version of your package and try running this machine again.  Note that you may need to wait 2-3 hours before the NPM registry will let you republish.'
+    },
+
     success: {
       description: 'Done.',
     },
@@ -44,7 +49,18 @@ module.exports = {
       dir: inputs.dir
     }).exec({
       error: function (err){
-        return exits.error(err);
+        try {
+          // err.stack
+          // err.killed
+          // err.signal
+          // err.code
+          if (err.message.match(/You cannot publish over the previously published version/i)){
+            return exits.alreadyExists();
+          }
+        }
+        catch (_e) {
+          return exits.error(err);
+        }
       },
       success: function (bufferedOutput){
         return exits.success();

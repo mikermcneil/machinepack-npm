@@ -1,0 +1,11 @@
+{
+  "machine": "unpublish",
+  "expectations": [
+    {
+      "using": {
+        "packageName": "not-a-real-pkg-omg-dont-actually-publish-a-pkg-with-this-name"
+      },
+      "outcome": "success"
+    }
+  ]
+}

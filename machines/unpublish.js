@@ -36,9 +36,9 @@ module.exports = {
 
   fn: function (inputs,exits) {
     var Proc = require('machinepack-process');
-
+    var cmd = 'npm unpublish '+inputs.packageName+' '+(inputs.version?('@'+inputs.version):'--force');
     Proc.spawn({
-      command: 'npm unpublish '+inputs.packageName+(inputs.version?('@'+inputs.version):'-f')
+      command: cmd
     }).exec({
       error: function (err){
         return exits.error(err);
