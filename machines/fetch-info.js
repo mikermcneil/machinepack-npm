@@ -38,6 +38,10 @@ module.exports = {
     var util = require('util');
     var _ = require('lodash');
 
+    if (inputs.packageName.match(/^@/)){
+      return exits.error(new Error('This machine does not currently support scoped packages (e.g. @mikermcneil/foobar)'));
+    }
+
     require('machinepack-http').sendHttpRequest({
       baseUrl: 'http://registry.npmjs.org',
       url: util.format('/%s', inputs.packageName)
