@@ -35,23 +35,19 @@ module.exports = {
   fn: function (inputs,exits) {
     var Proc = require('machinepack-process');
 
-    console.log('Running:','npm access restricted '+inputs.packageName);
     Proc.spawn({
       command: 'npm access restricted '+inputs.packageName
     }).exec({
       error: function (err){
-        console.log('error exit', err);
         try {
           if (err.message.match(/Sorry, you can\'t change the access level of unscoped packages/i)) {
             return exits.unscopedPackage();
           }
         }
         catch (_e){}
-        console.log('CALLING EXIT!');
         return exits.error(err);
       },
       success: function (bufferedOutput){
-        console.log('success exit');
         return exits.success();
       }
     });
