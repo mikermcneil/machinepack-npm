@@ -77,8 +77,16 @@ module.exports = {
         return exits.invalidPackage();
       },
       success: function (pkgData){
+
+        // if this package will be public (`restrictAccess` disabled)
+        // then the command will include `--access=public`
+        var cmd = 'npm publish';
+        if (!inputs.restrictAccess) {
+          cmd += ' --access=public';
+        }
+
         Proc.spawn({
-          command: 'npm publish',
+          command: cmd,
           dir: inputs.dir
         }).exec({
           error: function (err){
