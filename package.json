@@ -39,7 +39,9 @@
       "install-package",
       "list-packages-with-details",
       "publish",
-      "unpublish"
+      "unpublish",
+      "open-source",
+      "restrict"
     ],
     "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
   },
