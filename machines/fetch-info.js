@@ -45,18 +45,15 @@ module.exports = {
       error: function (err) {
         return exits.error(err);
       },
-      notOk: function (response) {
-        try{
-          // Determine whether the error code was returned because the module does not exist.
-          // (i.e. { status: 404, body: '{"error":"not_found","reason":"document not found"}' })
-          if (response.status === 404 && JSON.parse(response.body).error==='not_found') {
+      notFound: function (response) {
+        try {
+          // Determine whether the 404 status code was returned because the module does not exist.
+          if (JSON.parse(response.body).error==='not_found') {
             return exits.packageNotFound();
           }
-          return exits.error(response);
         }
-        catch (e) {
-          return exits.error(e);
-        }
+        catch (e){}
+        return exits.error(response);
       },
       success: function (response) {
         return exits.success(response.body);
