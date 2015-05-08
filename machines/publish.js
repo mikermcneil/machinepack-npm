@@ -16,31 +16,12 @@ module.exports = {
       required: true
     },
 
-    // 'package': {
-    //   friendlyName: 'Package name',
-    //   description: 'The name of the NPM package to publish.',
-    //   example: 'express',
-    //   required: true,
-    // },
-
-    // version: {
-    //   friendlyName: 'Package version',
-    //   description: 'The version of the package to publish.',
-    //   example: '1.0.0',
-    //   required: true
-    // },
-
     restrictAccess: {
       friendlyName: 'Restrict access?',
       description: 'Whether or not this package should be marked as private.',
       example: true,
       defaultsTo: false
     }
-
-    // TODO:
-    // tag: {
-    //   friendlyName: 'Tag'
-    // }
 
   },
 
