@@ -55,7 +55,7 @@ module.exports = {
       var npmModules = [];
 
       async.each(npmPackageNames, function (packageName, next) {
-        Machine.build(require('./get-package-json'))({
+        Machine.build(require('./fetch-info'))({
           packageName: packageName
         }).exec(function(err, packageJsonString) {
           if (err) return next(err);
