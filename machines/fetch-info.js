@@ -1,23 +1,26 @@
 module.exports = {
 
+
   friendlyName: 'Fetch package metadata',
+
 
   description: 'Fetch the package.json string for the specified package from the NPM registry.',
 
+
   cacheable: true,
 
-  extendedDescription: '',
 
   inputs: {
+
     packageName: {
       friendlyName: 'Package name',
       example: 'browserify',
       description: 'The unique name of the NPM package.',
       required: true
     }
+
   },
 
-  defaultExit: 'success',
 
   exits: {
     success: {
@@ -32,6 +35,7 @@ module.exports = {
       description: 'Unexpected error occurred.'
     },
   },
+
 
   fn: function (inputs,exits) {
 
@@ -63,6 +67,7 @@ module.exports = {
         return exits.success(response.body);
       }
     });
-  },
+  }
+
 
 };

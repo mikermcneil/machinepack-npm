@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: 'Install package',
   description: 'Install a package from NPM package to your local project',
-  extendedDescription: '',
+
   cacheable: true,
 
   inputs: {
@@ -43,8 +43,6 @@ module.exports = {
       example: 'warn'
     }
   },
-
-  defaultExit: 'success',
 
   exits: {
 

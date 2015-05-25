@@ -1,8 +1,14 @@
 module.exports = {
+
+
   friendlyName: 'Download package',
+
+
   description: 'Stream the tarball for the NPM package+version to disk, then extract it.',
-  extendedDescription: '',
+
+
   cacheable: true,
+
 
   inputs: {
 
@@ -26,10 +32,9 @@ module.exports = {
       "defaultsTo": "https://registry.npmjs.org",
       "example": "https://your-private-registry.npmjs.org"
     }
-,
+
   },
 
-  defaultExit: 'success',
 
   exits: {
 
@@ -61,6 +66,7 @@ module.exports = {
       description: 'Passed an invalid semantic version number. See https://docs.npmjs.com/misc/semver for details.'
     }
   },
+
 
   fn: function(inputs, exits) {
 

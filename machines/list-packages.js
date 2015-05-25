@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: 'List packages',
   description: 'List packages in the public npm registry whose keywords match the specified search query.',
-  extendedDescription: '',
+
   cacheable: true,
   inputs: {
     query: {
@@ -10,7 +10,7 @@ module.exports = {
       required: true
     }
   },
-  defaultExit: 'success',
+
   exits: {
     success: {
       example: ['sails-hook-autoreload']

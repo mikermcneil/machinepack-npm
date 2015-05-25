@@ -18,8 +18,6 @@ module.exports = {
     }
   },
 
-  defaultExit: 'success',
-
   exits: {
     success: {
       description: 'Returns parsed dictionary of data from the provided package.json string.',
