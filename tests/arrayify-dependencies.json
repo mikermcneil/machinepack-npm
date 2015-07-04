@@ -1,0 +1,45 @@
+{
+  "machine": "arrayify-dependencies",
+  "expectations": [
+    {
+      "using": {
+        "dependencies": {}
+      },
+      "outcome": "success",
+      "returns": []
+    },
+    {
+      "using": {
+        "dependencies": {
+          "pokemon": "^7.8.9"
+        }
+      },
+      "outcome": "success",
+      "returns": [
+        {
+          "name": "pokemon",
+          "semverRange": "^7.8.9"
+        }
+      ]
+    },
+    {
+      "using": {
+        "dependencies": {
+          "pokemon": "^7.8.9",
+          "pretend": "~0.4.0"
+        }
+      },
+      "outcome": "success",
+      "returns": [
+        {
+          "name": "pokemon",
+          "semverRange": "^7.8.9"
+        },
+        {
+          "name": "pretend",
+          "semverRange": "~0.4.0"
+        }
+      ]
+    }
+  ]
+}
