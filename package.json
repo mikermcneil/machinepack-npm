@@ -42,7 +42,8 @@
       "open-source",
       "restrict",
       "fetch-info",
-      "arrayify-dependencies"
+      "arrayify-dependencies",
+      "unarrayify-dependencies"
     ],
     "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
   },
