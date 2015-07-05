@@ -1,8 +1,14 @@
 module.exports = {
+  
+  
   friendlyName: 'Install package',
-  description: 'Install a package from NPM package to your local project',
+  
+  
+  description: 'Install a package from the NPM registry to the node_modules folder of a local project.',
+
 
   cacheable: true,
+
 
   inputs: {
 
@@ -43,6 +49,7 @@ module.exports = {
       example: 'warn'
     }
   },
+
 
   exits: {
 
