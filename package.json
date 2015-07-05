@@ -43,7 +43,8 @@
       "restrict",
       "fetch-info",
       "arrayify-dependencies",
-      "unarrayify-dependencies"
+      "unarrayify-dependencies",
+      "install-dependencies"
     ],
     "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
   },

@@ -1,10 +1,10 @@
 module.exports = {
 
 
-  friendlyName: 'Publish package',
+  friendlyName: 'Install NPM dependencies',
 
 
-  description: 'Publish a package to the public NPM registry.',
+  description: 'Install NPM dependencies of local package at the specified path.',
 
 
   inputs: {
@@ -13,25 +13,14 @@ module.exports = {
       friendlyName: 'Directory',
       description: 'The path to the directory where the package is located on disk.',
       example: '/Users/mikermcneil/dogfood-promo-site',
+      extendedDescription: 'This is to the local package itself-- NOT its node_modules folder! Also note that, if specified as a relative path, this will be resolved relative to the current working directory.',
       required: true
-    },
-
-    restrictAccess: {
-      friendlyName: 'Restrict access?',
-      description: 'Whether or not this package should be marked as private.',
-      example: true,
-      defaultsTo: false
     }
 
   },
 
 
   exits: {
-
-    alreadyExists: {
-      description: 'Cannot overwrite- that package has already been published at the version in the package.json file.',
-      extendedDescription: 'You should avoid publishing on top of existing versions of packages.  It can break developers\' production deployments.  However, if you made a terrible mistake and must do this, unpublish this version of your package and try running this machine again.  Note that you may need to wait 2-3 hours before the NPM registry will let you republish.'
-    },
 
     noSuchDir: {
       description: 'No directory exists at the provided path.'
@@ -46,11 +35,7 @@ module.exports = {
     },
 
     success: {
-      description: 'Done.',
-      example: {
-        name: '@mattmueller/cheerio',
-        version: '2.0.0'
-      }
+      description: 'Done.'
     },
 
   },
@@ -58,12 +43,17 @@ module.exports = {
 
   fn: function (inputs,exits) {
 
-    var Path = require('path');
+    var path = require('path');
     var Proc = require('machinepack-process');
     var Filesystem = require('machinepack-fs');
 
+    // Ensure specified dir path is absolute by resolving it
+    // relative to the current working directory.
+    inputs.dir = path.resolve(inputs.dir);
+
+    // Ensure this is a valid package.
     Filesystem.readJson({
-      source: Path.resolve(inputs.dir, 'package.json'),
+      source: path.join(inputs.dir, 'package.json'),
       schema: {
         name: 'some-package',
         version: '2.0.0'
@@ -78,15 +68,9 @@ module.exports = {
       },
       success: function (pkgData){
 
-        // if this package will be public (`restrictAccess` disabled)
-        // then the command will include `--access=public`
-        var cmd = 'npm publish';
-        if (!inputs.restrictAccess) {
-          cmd += ' --access=public';
-        }
-
+        // Run `npm install`
         Proc.spawn({
-          command: cmd,
+          command: 'npm install',
           dir: inputs.dir
         }).exec({
           error: function (err){
@@ -95,9 +79,6 @@ module.exports = {
               // err.killed
               // err.signal
               // err.code
-              if (err.message.match(/You cannot publish over the previously published version/i)){
-                return exits.alreadyExists();
-              }
               return exits.error(err);
             }
             catch (_e) {
@@ -107,14 +88,13 @@ module.exports = {
           notADir: exits.notADir,
           noSuchDir: exits.noSuchDir,
           success: function (bufferedOutput){
-            return exits.success(pkgData);
+            return exits.success();
           }
         });
       }
     });
 
-  },
-
+  }
 
 
 };
