@@ -1,10 +1,13 @@
 module.exports = {
 
 
-  friendlyName: 'Fetch package metadata',
+  friendlyName: 'Fetch info',
 
 
-  description: 'Fetch the package.json string for the specified package from the NPM registry.',
+  description: 'Look up information about the latest version of the specified NPM package.',
+
+
+  extendedDescription: 'This fetches the package.json string for the specified package directly from the NPM registry.',
 
 
   cacheable: true,
@@ -13,9 +16,8 @@ module.exports = {
   inputs: {
 
     packageName: {
-      friendlyName: 'Package name',
-      example: 'browserify',
       description: 'The unique name of the NPM package.',
+      example: 'browserify',
       required: true
     }
 
@@ -25,28 +27,32 @@ module.exports = {
   exits: {
 
     success: {
-      description: 'Returns a JSON string.',
-      variableName: 'packageJsonString',
-      example: '{"name": "browserify", etc.}',
+      outputFriendlyName: 'NPM package info',
+      outputDescription: 'Information about the specified NPM package, pulled directly from its package.json info in the NPM registry.',
+      example: {}
     },
 
     packageNotFound: {
       description: 'No package exists on the public NPM registry with the specified name.'
+    },
+
+    couldNotParse: {
+      description: 'The package.json string for the specified package could not be parsed as JSON.'
     }
 
   },
 
 
   fn: function (inputs,exits) {
-
     var util = require('util');
     var _ = require('lodash');
+    var Http = require('machinepack-http');
 
     if (inputs.packageName.match(/^@/)){
       return exits.error(new Error('This machine does not currently support scoped packages (e.g. @mikermcneil/foobar)'));
     }
 
-    require('machinepack-http').sendHttpRequest({
+    Http.sendHttpRequest({
       baseUrl: 'http://registry.npmjs.org',
       url: util.format('/%s', inputs.packageName)
     }).exec({
@@ -54,17 +60,14 @@ module.exports = {
         return exits.error(err);
       },
       notFound: function (response) {
-        try {
-          // Determine whether the 404 status code was returned because the module does not exist.
-          if (JSON.parse(response.body).error==='not_found') {
-            return exits.packageNotFound();
-          }
-        }
-        catch (e){}
-        return exits.error(response);
+        return exits.packageNotFound(response);
       },
       success: function (response) {
-        return exits.success(response.body);
+        var parsed;
+        try { parsed = JSON.parse(response.body); }
+        catch (e) { return exits.couldNotParse(e); }
+
+        return exits.success(parsed);
       }
     });
   }
