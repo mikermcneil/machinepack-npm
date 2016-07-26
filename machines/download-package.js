@@ -48,10 +48,10 @@ module.exports = {
   exits: {
 
     success: {
-      description: 'Package successfully downloaded.',
+      description: 'Package was successfully downloaded and extracted.',
       extendedDescription: 'The untar\'ed files will be stored in the operating system\'s temporary directory under a folder given by the `name` and `version` inputs.  e.g. if `name` is "foobar" and `version` is "0.2.1", then the untar\'ed files might be in "/tmp/foobar-0.2.1/package/*".  This exit returns the absolute path to the folder of untar\'ed goodies.',
       outputFriendlyName: 'Path',
-      outputDescription: 'The path to the downloaded NPM package on disk.',
+      outputDescription: 'The path to the downloaded & extracted NPM package on disk.',
       example: '/var/folders/_s/347n05_x2rgb_0w6s6y0ytr00000gn/T/machinepack-phantomjscloud-0.1.2',
     },
 
