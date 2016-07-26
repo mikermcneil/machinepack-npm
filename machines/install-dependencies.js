@@ -22,6 +22,10 @@ module.exports = {
 
   exits: {
 
+    success: {
+      description: 'Dependencies were successfully installed from NPM.'
+    },
+
     noSuchDir: {
       description: 'No directory exists at the provided path.'
     },
@@ -32,11 +36,7 @@ module.exports = {
 
     invalidPackage: {
       description: 'The package does not contain a package.json file, or it cannot be parsed.'
-    },
-
-    success: {
-      description: 'Done.'
-    },
+    }
 
   },
 
@@ -58,7 +58,7 @@ module.exports = {
         name: 'some-package',
         version: '2.0.0'
       }
-    }, {
+    }).exec({
       error: exits.error,
       doesNotExist: function (){
         return exits.invalidPackage();
@@ -66,7 +66,7 @@ module.exports = {
       couldNotParse: function (){
         return exits.invalidPackage();
       },
-      success: function (pkgData){
+      success: function (){
 
         // Run `npm install`
         Proc.spawn({
@@ -90,9 +90,9 @@ module.exports = {
           success: function (bufferedOutput){
             return exits.success();
           }
-        });
+        });//</after spawning `npm install` as a child process>
       }
-    });
+    });//</after ensuring this is a valid package>
 
   }
 
