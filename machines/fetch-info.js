@@ -23,17 +23,17 @@ module.exports = {
 
 
   exits: {
+
     success: {
       description: 'Returns a JSON string.',
       variableName: 'packageJsonString',
       example: '{"name": "browserify", etc.}',
     },
+
     packageNotFound: {
       description: 'No package exists on the public NPM registry with the specified name.'
-    },
-    error: {
-      description: 'Unexpected error occurred.'
-    },
+    }
+
   },
 
 
