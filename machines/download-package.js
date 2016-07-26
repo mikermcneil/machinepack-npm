@@ -112,7 +112,7 @@ module.exports = {
       // was specified, then use the path to a new subfolder within the operating
       // system's `/tmp` directory.
       var destinationPath = (function (){
-        if (typeof inputs.destination === 'undefined') {
+        if (typeof inputs.destination !== 'undefined') {
           return path.resolve(inputs.destination);
         }
         else {
