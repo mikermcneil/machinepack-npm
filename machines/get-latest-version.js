@@ -44,8 +44,8 @@ module.exports = {
 
 
   fn: function (inputs, exits) {
-    var util = require('util');
-    var NPM = require('./');
+    var _ = require('lodash');
+    var NPM = require('../');
 
     if (inputs.packageName.match(/^@/)){
       return exits.error(new Error('This machine does not currently support scoped packages (e.g. @mikermcneil/foobar)'));
@@ -69,7 +69,7 @@ module.exports = {
         } catch (e) { return exits.couldNotParse(e); }
 
         if (!_.isString(latestPublishedVersion)) {
-          return exits.couldNotParse(new Error('Missing or invalid `dist-tags.latest` version string received from NPM (it is claiming that `'+latestPublishedVersion+'` is the latest version of `sails-stdlib`!'));
+          return exits.couldNotParse(new Error('Missing or invalid `dist-tags.latest` version string received from NPM (it is claiming that `'+latestPublishedVersion+'` is the latest version)'));
         }
 
         return exits.success(latestPublishedVersion);
