@@ -44,7 +44,8 @@
       "fetch-info",
       "arrayify-dependencies",
       "unarrayify-dependencies",
-      "install-dependencies"
+      "install-dependencies",
+      "get-latest-version"
     ],
     "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
   },
