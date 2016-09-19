@@ -47,7 +47,8 @@
       "install-dependencies",
       "get-latest-version",
       "validate-version",
-      "compare-versions"
+      "compare-versions",
+      "compare-semver-ranges"
     ],
     "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
   },
