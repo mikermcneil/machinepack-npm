@@ -26,6 +26,7 @@
     "tar": "1.0.3"
   },
   "devDependencies": {
+    "string": "^3.3.1",
     "test-machinepack-mocha": "^2.1.1"
   },
   "machinepack": {
@@ -47,7 +48,8 @@
       "install-dependencies",
       "get-latest-version",
       "validate-version",
-      "compare-versions"
+      "compare-versions",
+      "is-version-compatible"
     ],
     "testsUrl": "https://travis-ci.org/mikermcneil/machinepack-npm"
   },

@@ -1,0 +1,83 @@
+{
+  "machine": "is-version-compatible",
+  "expectations": [
+
+
+    // With basic usage
+    // ===============================================================
+    {
+      "using": { "version": "3.0.1", "semverRange": "^3.0.0" }, "output": true, "outcome": "success"
+    },
+    {
+      "using": { "version": "3.0.1", "semverRange": "3.0.0" }, "output": false, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.0.1", "semverRange": "^3.0.0" }, "output": false, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.0.10", "semverRange": "~4.0.0" }, "output": true, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.0.10", "semverRange": "*" }, "output": true, "outcome": "success"
+    },
+
+    // Tests for minorsome ranges
+    // ===============================================================
+    {
+      "using": { "version": "4.5.291", "semverRange": "^4.5.294-2" }, "output": false, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.5.294", "semverRange": "^4.5.294-2" }, "output": true, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.5.295", "semverRange": "^4.5.294-2" }, "output": true, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.9.11", "semverRange": "^4.5.294-2" }, "output": true, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.12.2842", "semverRange": "^4.5.294-2" }, "output": true, "outcome": "success"
+    },
+    {
+      "using": { "version": "5.0.14", "semverRange": "^4.5.294-2" }, "output": false, "outcome": "success"
+    },
+
+    // Tests for patchsome ranges
+    // ===============================================================
+    {
+      "using": { "version": "4.5.291", "semverRange": "~4.5.294-2" }, "output": false, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.5.294", "semverRange": "~4.5.294-2" }, "output": true, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.5.295", "semverRange": "~4.5.294-2" }, "output": true, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.9.11", "semverRange": "~4.5.294-2" }, "output": false, "outcome": "success"
+    },
+    {
+      "using": { "version": "4.12.2842", "semverRange": "~4.5.294-2" }, "output": false, "outcome": "success"
+    },
+    {
+      "using": { "version": "5.0.14", "semverRange": "~4.5.294-2" }, "output": false, "outcome": "success"
+    },
+
+
+
+
+    // With invalid version
+    // ===============================================================
+    {
+      "using": { "version": "wat", "semverRange": "^3.0.0" }, "outcome": "error",
+    },
+
+    // With invalid semver range
+    // ===============================================================
+    {
+      "using": { "version": "3.0.0", "semverRange": "wat" }, "output": false, "outcome": "success",
+    },
+
+
+  ]
+}
