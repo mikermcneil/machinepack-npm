@@ -60,27 +60,24 @@ module.exports = {
   fn: function (inputs, exits){
 
     var async = require('async');
-    var Machine = require('machine');
-    var listPackages = Machine.build(require('./list-packages'));
-    var fetchInfo = Machine.build(require('./fetch-info'));
-    var parsePackageJson = Machine.build(require('./parse-package-json'));
+    var NPM = require('../');
 
 
-    listPackages({
+    NPM.listPackages({
       query: inputs.query
     }).exec(function (err, npmPackageNames) {
       if (err) { return exits.error(err); }
 
       // Now expand each module with full results directly
       // from the npm registry.
-      var npmModules = [];
+      var pkgInfos = [];
 
       async.each(
         npmPackageNames,
 
         function iteratee(packageName, next) {
 
-          fetchInfo({
+          NPM.fetchInfo({
             packageName: packageName
           }).exec(function (err, pkgInfo) {
             if (err) { return next(err); }
@@ -90,16 +87,14 @@ module.exports = {
 
               var rawJsonStr = JSON.stringify(pkgInfo);
 
-              metadata = parsePackageJson({
-                json: rawJsonStr
-              }).execSync();
+              metadata = NPM.parsePackageJson({ json: rawJsonStr }).execSync();
 
               // Attach raw json string
               metadata.rawJson = rawJsonStr;
 
             } catch (e){ return next(e); }
 
-            npmModules.push(metadata);
+            pkgInfos.push(metadata);
 
             return next();
 
@@ -109,7 +104,7 @@ module.exports = {
         // ~∞%°
         function afterwards(err) {
           if (err) { return exits.error(err); }
-          return exits.success(npmModules);
+          return exits.success(pkgInfos);
         }
       );//</async.each>
     });//</listPackages()>
