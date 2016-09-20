@@ -38,7 +38,7 @@ module.exports = {
       friendlyName: 'Save dependency?',
       description: 'If set, the installed package will be saved to the package.json file as a dependency.',
       extendedDescription: 'This runs `npm install` with the --save flag enabled.',
-      example: true,
+      example: false,
       defaultsTo: false
     },
 
@@ -46,7 +46,15 @@ module.exports = {
       friendlyName: 'Save dev dependency?',
       description: 'If set, the installed package will be saved to the package.json file as a development-only dependency.',
       extendedDescription: 'This runs `npm install` with the --save-dev flag enabled.',
-      example: true,
+      example: false,
+      defaultsTo: false
+    },
+
+    saveExact: {
+      friendlyName: 'Pin version?',
+      description: 'If set, the installed package will be saved to the package.json file as an exact version, rather than a semver range.',
+      extendedDescription: 'This runs `npm install` with the --save-exact flag enabled.  It should always be used in combination with either `save` or `saveDev`, and never by itself!',
+      example: false,
       defaultsTo: false
     },
 
@@ -85,6 +93,13 @@ module.exports = {
     var enpeem = require('enpeem');
     var semver = require('semver');
 
+    if (inputs.saveExact && !inputs.save && !inputs.saveDev) {
+      throw new Error('Cannot use `saveExact` without also setting either `save` or `saveDev`.');
+    }
+    if (inputs.save && inputs.saveDev) {
+      throw new Error('Cannot use both `save` AND `saveDev`!');
+    }
+
     // Resolve provided path to ensure it is absolute
     // (and default to cwd if it was left unspecified)
     inputs.dir = inputs.dir ? path.resolve(inputs.dir) : process.cwd();
@@ -102,6 +117,7 @@ module.exports = {
       dir: inputs.dir,
       save: inputs.save,
       saveDev: inputs.saveDev,
+      saveExact: inputs.saveExact,
       loglevel: inputs.loglevel,
       prefix: inputs.prefix,
       'cache-min': 999999999
